@@ -11,7 +11,7 @@ from django.views.generic.edit import (
 
 from django.urls import reverse_lazy
 
-from .models import Post
+from .models import Post, Comment
 
 # Create your views here.
 class HomePageView(ListView):
@@ -36,3 +36,11 @@ class BlogDeleteView(DeleteView):
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('home')
+
+class AddNewComment(CreateView):
+    model = Comment
+    template_name = 'add_comment.html'
+    fields = ['name', 'body', 'post']
+    success_url = reverse_lazy('home')
+
+

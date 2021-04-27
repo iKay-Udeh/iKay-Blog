@@ -5,7 +5,20 @@
         <h2>{{ post.title }}</h2>
         <p>{{ post.body }}</p>
     </div>
-
+    <h2>Comments...</h2>
+    {% if not post.comments.all %}
+        No Comments Yet
+    {% else %}
+        {% for comment in post.comments.all %}
+            <strong><p>{{ comment.name }}</p></strong>
+            <p>{{ comment.body }}</p>
+        {% endfor %}
+    {% endif %}
+    {% if user.is_authenticated %}
+    <p><a href="{% url 'comment' post.pk %}">Add Comment</a></p>
+    {% else %}
+        <p>You need to login to post a comment</p>
+    {% endif %}
     <p><a href="{% url 'post_edit' post.pk %}">+ Edit Post</a></p>
     <p><a href="{% url 'post_delete' post.pk %}">+ Delete Post</a></p>
 {% endblock content %}
