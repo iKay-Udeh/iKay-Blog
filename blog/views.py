@@ -13,6 +13,8 @@ from django.urls import reverse_lazy
 
 from .models import Post, Comment
 
+from django.contrib.auth.models import User
+
 # Create your views here.
 class HomePageView(ListView):
     model= Post
